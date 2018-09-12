@@ -4,5 +4,5 @@ This project can be used to automatically generate web based documentation for R
 ## Usage
 1. Run the build process by providing a main RAML file and destination directory:
 ```
-npm build.js api.raml api-console-build
+node build.js api.raml api-console-build
 ```

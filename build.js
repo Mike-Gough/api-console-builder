@@ -16,7 +16,13 @@ var builderOptions = {
   destination: tempDestination,
   api: tempSource + seperator + mainFile,
   apiType: 'RAML 1.0',
-  local: 'api-console-source'
+  local: 'api-console-source',
+  attributes: [
+    {
+      'base-uri': 'https://localhost/',
+      'append-headers': 'X-CID: abc'
+    }
+  ]
 }
 
 /*

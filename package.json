@@ -15,6 +15,7 @@
   "author": "Michael Gough",
   "license": "ISC",
   "dependencies": {
-    "api-console-builder": "^1.0.1"
+    "api-console-builder": "^1.0.1",
+    "fs-extra": "^7.0.0"
   }
 }

@@ -1,0 +1,5 @@
+DS_Store
+*.log
+api-console-build
+.DS_Store
+temp-*

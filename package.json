@@ -1,0 +1,20 @@
+{
+  "name": "build-api-console",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "build",
+    "MuleSoft",
+    "API",
+    "Console"
+  ],
+  "author": "Michael Gough",
+  "license": "ISC",
+  "dependencies": {
+    "api-console-builder": "^1.0.1"
+  }
+}

@@ -1,18 +1,22 @@
 #! /usr/bin/env node
 
-// Dependancies
+/*
+ * Required dependancies
+ */
 const fse = require('fs-extra');
 const builder = require('api-console-builder');
 
-// Configuration
-var args = process.argv.slice(2);
-var source = (args.length >= 1) ? args[0] : "api-source";
-var destination = (args.length >= 2) ? args[1] : "api-console-build";
-var mainFile = (args.length >= 3) ? args[2] : "api.raml";
-var seperator = (args.length >= 4) ? args[3] : "/";
-var tempSource = 'temp-api-source';
-var tempDestination = 'temp-api-console-build';
-var builderOptions = {
+/*
+ * Configure api-console builder
+ */
+const args = process.argv.slice(2);
+const source = (args.length >= 1) ? args[0] : "api-source";
+const destination = (args.length >= 2) ? args[1] : "api-console-build";
+const mainFile = (args.length >= 3) ? args[2] : "api.raml";
+const seperator = (args.length >= 4) ? args[3] : "/";
+const tempSource = 'temp-api-source';
+const tempDestination = 'temp-api-console-build';
+const builderOptions = {
   destination: tempDestination,
   api: tempSource + seperator + mainFile,
   apiType: 'RAML 1.0',
@@ -53,7 +57,9 @@ console.log('Copying service contract to a temporary directory')
 fse.copySync(source, tempSource)
 console.log(' - Successfully copied directory', source, 'to', tempSource)
 
-// Build API Console
+/*
+ * Build API Console
+ */
 console.log('Building API Console with options', builderOptions)
 builder(builderOptions)
 .then(function() {

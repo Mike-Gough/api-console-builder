@@ -15,7 +15,7 @@
   "author": "Michael Gough",
   "license": "ISC",
   "dependencies": {
-    "api-console-builder": "^1.0.3",
+    "api-console-builder": "^1.0.4",
     "fs-extra": "^7.0.0",
     "raml-json-enhance-node": "^0.3.2"
   }

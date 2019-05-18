@@ -63,7 +63,6 @@ action "NPM install" {
   args = "install"
 }
 
-# Build
 action "NPM Build" {
   uses = "actions/npm@e7aaefe"
   needs = ["NPM install"]

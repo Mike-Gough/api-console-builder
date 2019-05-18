@@ -18,7 +18,8 @@
   "dependencies": {
     "api-console-builder": "^1.0.4",
     "fs-extra": "^7.0.0",
-    "raml-json-enhance-node": "^0.3.2"
+    "raml-json-enhance-node": "^0.3.2",
+    "raml2obj": "^6.2.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0"

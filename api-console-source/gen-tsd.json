@@ -1,11 +1,13 @@
 {
   "excludeFiles": [
-    "tasks/*",
     "demo/**",
     "docs/**",
-    "test/*",
+    "test/**",
+    "build/**",
     "index.html",
-    "bower_components",
-    "node_modules"
+    "node_modules",
+    "entrypoint.html",
+    "service-worker.js",
+    "sw-precache-config.js"
   ]
 }

@@ -22,6 +22,7 @@ the License.
 <link rel="import" href="../../../paper-progress/paper-progress.html">
 <link rel="import" href="../../../paper-listbox/paper-listbox.html">
 <link rel="import" href="../../../paper-item/paper-item.html">
+<link rel="import" href="../../../paper-toggle-button/paper-toggle-button.html">
 <dom-module id="parser-element">
   <template>
     <style>
@@ -74,6 +75,7 @@ the License.
     <paper-tabs selected="{{selected}}">
       <paper-tab>Predefined models</paper-tab>
       <paper-tab>RAML 1.0</paper-tab>
+      <paper-tab>RAML 0.8</paper-tab>
       <paper-tab>OpenAPI</paper-tab>
       <paper-tab>API model (AMF)</paper-tab>
     </paper-tabs>
@@ -81,10 +83,19 @@ the License.
       <section>
         <paper-listbox on-selected-changed="_predefinedApiChanged">
           <paper-item data-src="demo-api.json">Demo api</paper-item>
+          <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
           <paper-item data-src="array-body.json">Body with array</paper-item>
+          <paper-item data-src="array-body-compact.json">Body with array - compact model</paper-item>
           <paper-item data-src="nexmo-sms-api.json">Nexmo SMS API</paper-item>
+          <paper-item data-src="nexmo-sms-api-compact.json">Nexmo SMS API - compact model</paper-item>
           <paper-item data-src="appian-api.json">Appian API</paper-item>
+          <paper-item data-src="appian-api-compact.json">Appian API - compact model</paper-item>
           <paper-item data-src="exchange-experience-api.json">Exchange experience API</paper-item>
+          <paper-item data-src="exchange-experience-api-compact.json">Exchange experience API - compact model</paper-item>
+          <paper-item data-src="apic-80-compact.json">APIC-80 (issue)</paper-item>
+          <paper-item data-src="apic-83-compact.json">APIC-83 (issue)</paper-item>
+          <paper-item data-src="apic-84-compact.json">APIC-84 (issue)</paper-item>
+          <paper-item data-src="apic-130-compact.json">APIC-130 (issue)</paper-item>
         </paper-listbox>
       </section>
       <section>
@@ -103,6 +114,20 @@ the License.
       </section>
       <section>
         <div class="row">
+          <paper-input label="RAML 0.8 main file location or zip" type="url" id="r8u"></paper-input>
+          <paper-button class="action-button" raised on-click="_raml8Url">Go</paper-button>
+        </div>
+        or
+        <div class="row">
+          <paper-input label="RAML 0.8 zip file or single api file" type="file" id="r8f"></paper-input>
+          <paper-button class="action-button" raised on-click="_raml8File">Go</paper-button>
+        </div>
+        or
+        <paper-textarea label="RAML 0.8 text content" id="r8t"></paper-textarea>
+        <paper-button class="action-button" raised on-click="_raml8Text">Go</paper-button>
+      </section>
+      <section>
+        <div class="row">
           <paper-input label="OpenAPI main file location or zip" type="url" id="ou"></paper-input>
           <paper-button class="action-button" raised on-click="_oasUrl">Go</paper-button>
         </div>
@@ -115,14 +140,15 @@ the License.
         <paper-textarea label="OpenAPI text content" id="ot"></paper-textarea>
         <paper-button class="action-button" raised on-click="_oasText">Go</paper-button>
       </section>
+
       <section>
         <div class="row">
-          <paper-input label="AMF main file location or zip" type="url" id="au"></paper-input>
+          <paper-input label="AMF model file location" type="url" id="au"></paper-input>
           <paper-button class="action-button" raised on-click="_amfUrl">Go</paper-button>
         </div>
         or
         <div class="row">
-          <paper-input label="AMF zip file or single api file" type="file" id="af"></paper-input>
+          <paper-input label="AMF model file" type="file" accept=".json,application/json" id="af"></paper-input>
           <paper-button class="action-button" raised on-click="_amfFile">Go</paper-button>
         </div>
         or
@@ -151,10 +177,12 @@ the License.
    * @memberof ApiElements
    */
   class ParserElement extends Polymer.Element {
-    static get is() { return 'parser-element'; }
+    static get is() {
+      return 'parser-element';
+    }
     static get properties() {
       return {
-        selected:{
+        selected: {
           type: Number,
           value: 0
         },
@@ -244,6 +272,20 @@ the License.
       this._processText(opts);
     }
 
+    _raml8Url() {
+      const value = this.$.r8u.value;
+      if (!value) {
+        this._error('Please, provide a value for the data location');
+        return;
+      }
+      const opts = {
+        dataType: 'raml8',
+        dataFormat: 'url',
+        dataValue: value
+      };
+      this._processText(opts);
+    }
+
     _ramlFile() {
       const value = this.$.rf.inputElement.inputElement.files[0];
       if (!value) {
@@ -258,6 +300,20 @@ the License.
       this._processFile(opts);
     }
 
+    _raml8File() {
+      const value = this.$.r8f.inputElement.inputElement.files[0];
+      if (!value) {
+        this._error('Please, select file first');
+        return;
+      }
+      const opts = {
+        dataType: 'raml8',
+        dataFormat: 'file',
+        dataValue: value
+      };
+      this._processFile(opts);
+    }
+
     _ramlText() {
       const value = this.$.rt.value;
       if (!value) {
@@ -266,6 +322,20 @@ the License.
       }
       const opts = {
         dataType: 'raml',
+        dataFormat: 'text',
+        dataValue: value
+      };
+      this._processText(opts);
+    }
+
+    _raml8Text() {
+      const value = this.$.r8t.value;
+      if (!value) {
+        this._error('Please, provide a RAML data first');
+        return;
+      }
+      const opts = {
+        dataType: 'raml8',
         dataFormat: 'text',
         dataValue: value
       };
@@ -320,12 +390,7 @@ the License.
         this._error('Please, provide a value for the data location');
         return;
       }
-      const opts = {
-        dataType: 'amf',
-        dataFormat: 'url',
-        dataValue: value
-      };
-      this._processText(opts);
+      this._processDownloadModel(value);
     }
 
     _amfFile() {
@@ -334,12 +399,7 @@ the License.
         this._error('Please, select file first');
         return;
       }
-      const opts = {
-        dataType: 'amf',
-        dataFormat: 'file',
-        dataValue: value
-      };
-      this._processFile(opts);
+      this._processAmfFile(value);
     }
 
     _amfText() {
@@ -364,19 +424,49 @@ the License.
     }
 
     _loadFile(file) {
-      this.loading = true;
       const url = '../models/' + file;
-      const xhr = new XMLHttpRequest();
-      xhr.addEventListener('error', () => {
-        this._error('Request error. File not found.');
+      this._processDownloadModel(url);
+    }
+
+    _processDownloadModel(modelLocation) {
+      this.loading = true;
+      this._downloadFile(modelLocation)
+      .then((data) => {
+        this.loading = false;
+        this._setAmfValue(data);
+      })
+      .catch((cause) => {
+        this.loading = false;
+        this._error(cause.message);
       });
-      xhr.addEventListener('load', (e) => this._setAmfValue(e.target.response));
-      xhr.open('GET', url, true);
-      try {
-        xhr.send();
-      } catch (e) {
-        this._error(e.message);
-      }
+    }
+
+    _downloadFile(fileLocation) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', (e) => resolve(e.target.response));
+        xhr.addEventListener('error', () => reject(new Error('Unable to download ' + fileLocation)));
+        xhr.open('GET', fileLocation, true);
+        try {
+          xhr.send();
+        } catch (e) {
+          reject(new Error(e.message));
+        }
+      });
+    }
+
+    _processAmfFile(file) {
+      this.loading = true;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.loading = false;
+        this._setAmfValue(e.target.result);
+      };
+      reader.onerror = () => {
+        this.loading = false;
+        this._error('Unable to read the file');
+      };
+      reader.readAsText(file);
     }
   }
   window.customElements.define(ParserElement.is, ParserElement);

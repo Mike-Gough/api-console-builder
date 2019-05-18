@@ -18,7 +18,7 @@
   <link rel="import" href="../../../paper-icon-button/paper-icon-button.html">
   <link rel="import" href="../../../paper-item/paper-item.html">
   <link rel="import" href="../../../paper-listbox/paper-listbox.html">
-  <link rel="import" href="../../api-console-styles.html">
+  <link rel="import" href="../../../api-console-default-theme/api-console-default-theme.html">
   <link rel="import" href="../../api-console.html">
   <link rel="import" href="../parser-element/parser-element.html">
   <custom-style>
@@ -50,8 +50,8 @@
 <body unresolved>
   <app-location use-hash-as-path></app-location>
   <raml-aware scope="demo-model"></raml-aware>
-  <api-console aware="demo-model" hidden app>
-    <paper-menu-button slot="toolbar" dynamic-align>
+  <api-console aware="demo-model" hidden app redirect-uri="https://auth.advancedrestclient.com/oauth-popup.html">
+    <paper-menu-button slot="toolbar" dynamic-align id="demoMenu">
       <paper-icon-button icon="arc:menu" slot="dropdown-trigger"></paper-icon-button>
       <paper-listbox slot="dropdown-content" id="apiList" on-selected-changed="_apiChanged">
         <paper-item>
@@ -62,6 +62,18 @@
         </paper-item>
         <paper-item>
           <paper-toggle-button data-action="noAttribution">No attribution (see license)</paper-toggle-button>
+        </paper-item>
+        <paper-item>
+          <paper-toggle-button data-action="manualNavigation">Manual navigation</paper-toggle-button>
+        </paper-item>
+        <paper-item>
+          <paper-toggle-button data-action="navigationOpened">Navigation opened</paper-toggle-button>
+        </paper-item>
+        <paper-item>
+          <paper-toggle-button data-action="noExtensionBanner">No extension banner</paper-toggle-button>
+        </paper-item>
+        <paper-item>
+          <paper-toggle-button data-action="inlineMethods">Render Try It inline with method documentation</paper-toggle-button>
         </paper-item>
         <paper-item data-click-action="goBack">Close this API</paper-item>
       </paper-listbox>

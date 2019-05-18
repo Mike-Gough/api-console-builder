@@ -4,7 +4,8 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "node_modules/eslint/bin/eslint.js *.js"
   },
   "keywords": [
     "build",
@@ -18,5 +19,8 @@
     "api-console-builder": "^1.0.4",
     "fs-extra": "^7.0.0",
     "raml-json-enhance-node": "^0.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
   }
 }

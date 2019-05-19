@@ -45,8 +45,6 @@ removeTempDirectories();
 console.log('Creating temporary working directories');
 fse.ensureDirSync(tempSource);
 console.log(' - Successfully created source directory', tempSource);
-fse.ensureDirSync(tempDestination);
-console.log(' - Successfully created destination directory', tempSource);
 
 /*
  * Copy source to temporary directory.

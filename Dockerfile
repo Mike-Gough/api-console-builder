@@ -14,4 +14,4 @@ RUN npm install
 copy . .
 
 # If an action does not use the runs configuration option, the commands in ENTRYPOINT will execute. The Docker ENTRYPOINT instruction has a shell form and exec form. We will use the exec form of the ENTRYPOINT instruction to call our node script. This will allow us to pass arguments to the script when we run the container.
-ENTRYPOINT ["node", "build.js"]
+ENTRYPOINT ["node", "--max-old-space-size=8192", "build.js"]

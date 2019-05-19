@@ -5,6 +5,7 @@
  * Required dependancies
  */
 const fse = require('fs-extra');
+const path = require('path');
 const builder = require('@api-components/api-console-builder');
 
 /*
@@ -14,15 +15,14 @@ const args = process.argv.slice(2);
 const source = (args.length >= 1) ? args[0] : "api-source";
 const destination = (args.length >= 2) ? args[1] : "api-console-build";
 const mainFile = (args.length >= 3) ? args[2] : "api.raml";
-const seperator = (args.length >= 4) ? args[3] : "/";
 const tempSource = 'temp-api-source';
 const tempDestination = 'temp-api-console-build';
 const builderOptions = {
   destination: tempDestination,
-  api: tempSource + seperator + mainFile,
+  api: path.join(tempSource, mainFile),
   apiType: 'RAML 1.0',
   local: 'api-console-source',
-  withAmf: false,
+  withAmf: true,
   attributes: [
     'no-try-it',
     'no-extension-banner',

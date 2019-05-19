@@ -4,7 +4,7 @@
   "description": "",
   "main": "build.js",
   "engines": {
-    "node": "10.15.3",
+    "node": "12.2.0",
     "npm": "6.9.0"
   },
   "scripts": {
@@ -21,7 +21,8 @@
   "license": "ISC",
   "dependencies": {
     "@api-components/api-console-builder": "^1.0.10",
-    "fs-extra": "^8.0.1"
+    "fs-extra": "^8.0.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "eslint": "^5.16.0"

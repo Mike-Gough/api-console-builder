@@ -9,7 +9,7 @@ Depending on your development environment, you will need either [Docker](https:/
 1. Navigate to the directory containing your RAML Service Contract.
 2. Execute api-console-builder by running the following command:
 ```
-sudo docker run --init --rm --volume $(pwd):/tmp "mikeyryan/api-console-builder:latest" /tmp/<raml-source-path> <destination-path> <main-file-name>
+sudo docker run --init --rm --volume $(pwd):/usr/src/app/api-source "mikeyryan/api-console-builder:latest"
 ```
 
 ### Running from source code

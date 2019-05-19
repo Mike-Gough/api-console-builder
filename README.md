@@ -11,6 +11,7 @@ Depending on your development environment, you will need either [Docker](https:/
 ```
 sudo docker run --init --rm --volume $(pwd):/usr/src/app/api-source "mikeyryan/api-console-builder:latest"
 ```
+Note: api-console crashes if it does not have enough memory. To work reliably, you need to ensure docker has access to at least 4gb of memory.
 
 ### Running from source code
 1. Clone the source code repository:
@@ -21,7 +22,7 @@ sudo docker run --init --rm --volume $(pwd):/usr/src/app/api-source "mikeyryan/a
   ```npm install```
 1. Execute api-console-builder by running the following command:
   ```
-  node --max-old-space-size=8192 build.js <raml-source-path> <destination-path> <main-file-name>
+  node --max-old-space-size=4096 build.js <raml-source-path> <destination-path> <main-file-name>
   ```
 
 ## Further reading

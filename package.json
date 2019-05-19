@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "build.js",
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.9.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "node_modules/eslint/bin/eslint.js *.js"
@@ -16,12 +20,10 @@
   "author": "Michael Gough",
   "license": "ISC",
   "dependencies": {
-    "api-console-builder": "^1.0.4",
-    "fs-extra": "^7.0.0",
-    "raml-json-enhance-node": "^0.3.2",
-    "raml2obj": "^6.2.0"
+    "@api-components/api-console-builder": "^1.0.10",
+    "fs-extra": "^8.0.1"
   },
   "devDependencies": {
-    "eslint": "^3.19.0"
+    "eslint": "^5.16.0"
   }
 }

@@ -5,7 +5,7 @@
  * Required dependancies
  */
 const fse = require('fs-extra');
-const builder = require('api-console-builder');
+const builder = require('@api-components/api-console-builder');
 
 /*
  * Configure api-console builder
@@ -22,12 +22,15 @@ const builderOptions = {
   api: tempSource + seperator + mainFile,
   apiType: 'RAML 1.0',
   local: 'api-console-source',
+  withAmf: false,
   attributes: [
+    'no-try-it',
+    'no-extension-banner',
     {
-      'base-uri': 'https://localhost/',
-      'append-headers': 'X-CID: abc',
-    },
-  ],
+      'responsive-width': '680px',
+      'append-headers': 'X-CID: test-123\nx-api-console: true'
+    }
+  ]
 };
 
 /*
